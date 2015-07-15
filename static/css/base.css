@@ -1,0 +1,54 @@
+/************ COLORS ************/
+/*
+    81D8D0 Tiffany Blue
+    B8DBFF Light Tiffany Blue
+    7E7E80 asset-description (light grey)
+    rgba(204, 204, 204, .5) Footer <hr>/Dividers
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,body {
+    height: 100%;
+    font-family: 'Courier';
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    padding-bottom: 30px;
+}
+
+.page-container {
+    width: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 5px;
+    border: 1px solid;
+}
+
+/************ HEADER ************/
+
+/************ MAIN ************/
+
+/************ FOOTER ************/
+
+
+
+.contact-icon {
+    padding: 1px 0px 1px 1px;
+    font-size: 30px;
+}
+
+.tiffany-opaque-bg {
+    background-color: rgba(129, 216, 208, .2) !important;
+}
+
+.tiffany-font {
+    color: #81D8D0;
+}

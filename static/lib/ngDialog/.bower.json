@@ -1,0 +1,11 @@
+{
+  "name": "ngDialog.min",
+  "_cacheHeaders": {
+    "Last-Modified": "Fri, 06 Mar 2015 07:45:43 GMT",
+    "Content-Type": "application/javascript"
+  },
+  "main": "index.js",
+  "_source": "http://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.3.12/js/ngDialog.min.js",
+  "_target": "*",
+  "_originalSource": "http://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.3.12/js/ngDialog.min.js"
+}

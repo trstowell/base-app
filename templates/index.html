@@ -1,0 +1,45 @@
+<html ng-app="SWIM">
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Wake me at</title>
+    <base href="/index.html"></base>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!-- LOAD EXTERNAL STYLESHEETS & SCRIPTS -->
+    <!-- We use AngularJS, Angular-UI-Bootstrap (Bootstrap written in pure Angular), and Bootstrap CSS -->
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/alarm.css">
+
+    <script src="../static/lib/angular/index.js"></script>
+    <script src="../static/lib/angular-route/index.js"></script>
+    <!--<script src="../static/lib/ngDialog/index.js"></script>-->
+    <!--<script src="../static/lib/angular-ui-bootstrap/index.js"></script>-->
+    <script src="../static/js/base.js"></script>
+
+
+</head>
+
+<body>
+    <div class="page-container">
+        <div id="header">
+
+        </div><!--header-->
+
+        <div id="content">
+
+            <ng-view>
+                        <!-- Here is where our partial HTML files will be injected -->
+            </ng-view>
+        </div><!--content-->
+
+    <div id="footer">
+    </div><!--footer-->
+
+    </div><!--page-container-->
+
+</body>
+
+</html>
