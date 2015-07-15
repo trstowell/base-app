@@ -11,14 +11,14 @@ from fabric.context_managers import cd
 from fabric.network import ssh
 import datetime
 
-# ssh.util.log_to_file("swim.log", 10)
+# ssh.util.log_to_file("base-app.log", 10)
 
 env.user = "root"
 env.password = "wrt54g00"
-env.repo = "trstowell"
+env.repo = "base-app"
 env.repo_root = "/app/%s" % env.repo
 
-env.hosts = ["trstowell.com"]
+env.hosts = ["45.55.81.255"]
 
 def deploy():
 
@@ -28,7 +28,7 @@ def deploy():
         run('mv %s /backups' % tar_filename)
         run('rm -r %s' % env.repo)
 
-        run('git clone http://github.com/trstowell/trstowell.git')
+        run('git clone http://github.com/trstowell/%s.git' % env.repo)
 
     run('supervisorctl -c /etc/supervisor/supervisord.conf restart gunicorn')
 
@@ -54,7 +54,7 @@ def install_git():
 
 def clone_repo():
     with cd('/app/%s' % env.repo):
-        run('git clone http://github.com/trstowell/trstowell.git') # Manually enter Git password
+        run('git clone http://github.com/trstowell/%s.git' % env.repo) # Manually enter Git password
 
     with cd(env.repo_root):
         run('chmod +x *.py')
