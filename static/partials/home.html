@@ -1,3 +1,77 @@
-<div id="homeContent">
+<div id="homeContent" ng-controller="HomeController">
+
+    <md-toolbar id="header">
+      <div class="md-toolbar-tools">
+        <h2>
+        <span id="header-logo">GIFTLY
+        <span style="color: grey; font-size: 14px;">Do good and look great, for less</span>
+        </span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-raised" aria-label="About">
+            About
+        </md-button>
+        <md-button id="cart-icon-header" class="md-fab md-mini" aria-label="Favorite">
+          <i class="material-icons">shopping_cart</i>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+<!--
+    <div id="categories-header" layout="row">
+        <!--
+        <div flex="20">Jewelry</div>
+        <div flex="20">Clothing</div>
+        <div flex="20">Accessories</div>
+    </div>
+
+
+        -->
+
+    <div id="how-it-works-row" layout="row" layout-align="center center">
+      <div flex="33">
+          <h3>Step 1</h3>
+          <p>Choose your items</p>
+      </div>
+      <div flex="33">
+          <h3>Step 2</h3>
+          <p>Checkout with <span id="etsy-logo">Etsy</span></p>
+      </div>
+      <div>
+          <h3>Step 3</h3>
+          <p>Pat yourself on the back!</p>
+      </div>
+    </div>
+
+
+    <div class="charity-row" ng-repeat="charity in charities">
+        <md-button ng-click="showAlert()" class="md-fab md-mini charity-icon">
+          <i class="material-icons">{{ charity.icon }}</i>
+        </md-button>
+        <span>{{ charity.name }}</span>
+        <div layout="row" class="listing-row">
+            <div style="display:inherit;">
+                <md-card ng-repeat="card in cards">
+                <md-card-title>
+                    <span class="price-card">$12</span>
+                   <md-card-title-media>
+                    <div class="md-media-lg card-media">
+                        <img src="/static/img/claddagh.jpg">
+                    </div>
+                  </md-card-title-media>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                 <!-- <md-button class="md-fab md-mini"><i class="material-icons">favorite</i></md-button>-->
+                  <md-button class="buy-button">Buy</md-button>
+                </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 
 </div>

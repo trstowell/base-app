@@ -6,6 +6,11 @@
     rgba(204, 204, 204, .5) Footer <hr>/Dividers
 */
 
+:root {
+    --main-font-color: #595959;
+    --etsy-color: #f45800;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +18,8 @@
 
 html,body {
     height: 100%;
-    font-family: 'Courier';
+    color: var(--main-font-color);
+    /*font-size: 14px;*/
 }
 
 html {
@@ -33,7 +39,62 @@ body {
 
 /************ HEADER ************/
 
+md-toolbar#header,
+md-toolbar#categories-header{
+    background-color: white;
+    border-bottom: 1px grey;
+}
+
+#header-logo {
+    font-weight: bolder;
+    color: var(--main-font-color);
+    font-size: 30px;
+}
+
+#categories-header {
+    /*color: #595959;*/
+    padding: 16px;
+}
+
+#cart-icon-header {
+    background-color: #8c83ff;
+}
+
+#how-it-works-row {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+#how-it-works-row h3 {
+    padding-bottom: 5px;
+}
+#etsy-logo {
+    font-family: "Times New Roman";
+    color: #f45800;
+    font-size: 20px;
+}
+
 /************ MAIN ************/
+
+.listing-row {
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+.buy-button {
+    background-color: lightgreen;
+}
+
+.charity-icon {
+    background-color: rgba(129, 216, 208, 1) !important;
+}
+
+.charity-row {
+
+}
+
+.price-card {
+
+}
 
 /************ FOOTER ************/
 
