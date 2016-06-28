@@ -1,0 +1,20 @@
+<md-dialog ng-cloak>
+  <form>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>{{ charity.name }}
+            <span class="charity-rating"><img src="/static/img/4stars.png" title="Charity Navigator rating"></span>
+        </h2>
+            <p ng-repeat="paragraph in charity.description">
+                {{ paragraph }}
+            </p>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button href="{{ charity.url }}" target="_blank">
+        Visit Wesbite
+      </md-button>
+      <span flex></span>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

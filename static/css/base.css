@@ -58,11 +58,13 @@ md-toolbar#categories-header{
 
 #cart-icon-header {
     background-color: #8c83ff;
+    margin-right: 20px;
 }
 
 #how-it-works-row {
     padding: 15px;
     margin-bottom: 15px;
+    border-bottom: 1px solid lightgray;
 }
 #how-it-works-row h3 {
     padding-bottom: 5px;
@@ -74,6 +76,10 @@ md-toolbar#categories-header{
 }
 
 /************ MAIN ************/
+
+md-card {
+    border-radius: 8px;
+}
 
 .listing-row {
     margin-left: 20px;
@@ -94,6 +100,40 @@ md-toolbar#categories-header{
 
 .price-card {
 
+}
+
+    /** CART **/
+
+#cart-container {
+    min-width: 30px;
+    padding-top: 50px;
+    position: relative;
+}
+
+#cart-footer {
+    border-top: 5px solid #fafafa;
+}
+
+    /** CHARITY DIALOG **/
+
+.charity-rating {
+    margin-left: 12px;
+}
+
+md-dialog {
+    max-width: 700px;
+}
+
+md-dialog h2 {
+    margin-bottom: 25px;
+}
+
+md-dialog p {
+    margin-top: 10px;
+}
+
+md-dialog .md-button{
+    color: #3399cc;
 }
 
 /************ FOOTER ************/
