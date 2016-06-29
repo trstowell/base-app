@@ -11,7 +11,8 @@
         <span flex></span>
 
         <md-button ng-click="toggleLeft()" id="cart-icon-header" class="md-fab md-mini" aria-label="Favorite">
-          <i class="material-icons">shopping_cart</i>
+            <!--<i class="material-icons">shopping_cart</i>-->
+            <i class="material-icons">add_location</i>
         </md-button>
       </div>
     </md-toolbar>
@@ -48,17 +49,25 @@
         md-disable-backdrop
         md-whiteframe="4">
       <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        <h1 class="md-toolbar-tools">Add Listing</h1>
       </md-toolbar>
       <md-content layout-padding>
-        <md-button ng-click="toggleLeft()" class="md-primary" hide-gt-md>
-          Close Sidenav Left
+        <md-button ng-click="toggleLeft()">
+          Close
         </md-button>
-        <p hide show-gt-md>
-          This sidenav is locked open on your device. To go back to the default behavior,
-          narrow your display.
-        </p>
+        listing_id, price, quantity
+        <md-input-container>
+            <label>Listing ID</label>
+            <input ng-model="listing.listing_id">
+        </md-input-container>
+        <md-input-container>
+            <label>Price</label>
+            <input ng-model="listing.price">
+        </md-input-container>
+          <br><md-button ng-click="submit()">Submit</md-button>
+
       </md-content>
+
     </md-sidenav>
 
     <div id="home-container" layout="row" layout-align="" flex>
@@ -90,23 +99,31 @@
             </div>
         </div>
 
-        <div id="cart-container" hide-md hide-sm hide-xs>
-            <md-card>
-             <md-card-content>
+        <div ng-controller="CartController" ng-model="cart" id="cart-container" hide-md hide-sm hide-xs>
+        <md-card>
+        <md-card-content>
 
-             <h2>Votes</h2>
-             <md-list>
-              <md-list-item class="md-2-line" ng-repeat="item in cart">
-                <md-checkbox ng-model="item.done"></md-checkbox>
-                <div class="md-list-item-text">
-                  <h3>{{item.title}}</h3>
-                  <p>{{item.description}}</p>
+            <div id="cart-header" layout="row" layout-align="space-between center">
+                <h2>Votes</h2>
+                <!--<md-button ng-click="empty()">Reset</md-button>-->
+            </div>
+
+            <md-list>
+                <md-list-item  ng-repeat="listing in cart.listings">
+                    <md-button class="md-fab md-mini charity-icon"><i class="material-icons">pets</i></md-button>
+                    <div class="md-list-item-text"><p>{{listing.quantity}}</p></div>
+                </md-list-item>
+            <div layout="row" layout-align="space-between center">
+                <div id="cart-total-text">Total:</div>
+                <div>
+                $&nbsp;<span id="cart-total-price">{{ cart.total }}</span>
                 </div>
-              </md-list-item>
+            </div>
             </md-list>
-             </md-card-content>
-             <md-card-footer id="cart-footer">
-               <md-button>Submit</md-button>
+
+         </md-card-content>
+             <md-card-footer layout=column" layout-align="space-between center" id="cart-footer">
+                 We give <span id="cart-total-donation">$ {{ (cart.total * .2) | number: 0}}</span>
              </md-card-footer>
             </md-card>
         </div>

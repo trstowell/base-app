@@ -9,6 +9,7 @@
 :root {
     --main-font-color: #595959;
     --etsy-color: #f45800;
+    --google-blue: #3399cc;
 }
 
 * {
@@ -19,6 +20,7 @@
 html,body {
     height: 100%;
     color: var(--main-font-color);
+
     /*font-size: 14px;*/
 }
 
@@ -87,7 +89,8 @@ md-card {
 }
 
 .buy-button {
-    background-color: lightgreen;
+    /*background-color: lightgreen;*/;
+    color: var(--google-blue);
 }
 
 .charity-icon {
@@ -105,15 +108,38 @@ md-card {
     /** CART **/
 
 #cart-container {
-    min-width: 30px;
+    width: 300px;
     padding-top: 50px;
     position: relative;
 }
 
-#cart-footer {
-    border-top: 5px solid #fafafa;
+cart-header {
+    margin-bottom: 25px;
 }
 
+
+#cart-container md-list-item {
+    height: 80px;
+}
+
+#cart-footer {
+    border-top: 5px solid #fafafa;
+    background-color: lightgreen;
+}
+
+#cart-total-text,
+#cart-total-donation {
+    /*margin-left: 10px;*/
+}
+
+#cart-total-price {
+    color: green;
+    font-weight: bolder;
+}
+
+#cart-total-donation {
+
+}
     /** CHARITY DIALOG **/
 
 .charity-rating {
@@ -124,16 +150,12 @@ md-dialog {
     max-width: 700px;
 }
 
-md-dialog h2 {
-    margin-bottom: 25px;
-}
-
 md-dialog p {
     margin-top: 10px;
 }
 
-md-dialog .md-button{
-    color: #3399cc;
+.md-button {
+    color: var(--google-blue);
 }
 
 /************ FOOTER ************/

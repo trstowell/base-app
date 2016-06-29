@@ -17,13 +17,38 @@ app.config( function($routeProvider, $locationProvider) {
          $locationProvider.html5Mode(true);
 });
 
-app.run(function($cookies) {
-    // var expireDate = new Date();
-    // expireDate.setDate(expireDate.getDate() + 7);
-    //
-    // $cookies.put("CartID", '111', {expires: expireDate, path: '/'});
-    // console.log($cookies.get("CartID"));
-    // console.log(expireDate);
+app.run(function($rootScope, $cookies, $http) {
+    console.log("Checking for guest_id cookie.");
+
+    var guest_id = $cookies.get('guest_id');
+
+    if (guest_id) {
+        console.log("Welcome back Guest: ".concat(guest_id));
+        // console.log($cookies.getObject("cart"));
+    }
+    else {
+        console.log("guest_id cookie NOT found. Generating...");
+
+        var api_key = 'bntabkgzjfwtblbko25g34b8';
+        var url = "http://127.0.0.1:5000/generate";
+
+        $http.get(url)
+            .then(
+                function successCallback (response){
+                    console.log('Setting $COOKIE guest_id to:  '.concat(response.data.guest_id));
+                    var expireDate = new Date();
+                    expireDate.setDate(expireDate.getDate() + 7);
+
+                    $cookies.put("guest_id", response.data.guest_id, {expires: expireDate, path: '/'});
+                },
+                function failureCallback (response){
+                    console.log(response);
+                }
+            );
+    }
+
+
+
 });
 
 app.controller('HomeController', function($scope, $mdDialog, $mdSidenav, CartFactory){
@@ -76,48 +101,75 @@ app.controller('HomeController', function($scope, $mdDialog, $mdSidenav, CartFac
 
     $scope.toggleLeft = function() {
         $mdSidenav('left').toggle();
-        CartFactory.add({'listing_id': 123, 'name': 'bracelet'});
   };
 
-    $scope.add = CartFactory.add;
-    $scope.set = CartFactory.set;
-    $scope.empty = CartFactory.empty;
+    $scope.add = function(){
+        CartFactory.add();
+        CartFactory.set();
+    };
 
 });
 
-app.factory('CartFactory', function($cookies) {
+app.factory('APIFactory', function($cookies, $http) {
 
-    var cart = {
-        'quantity': 0,
-        'total': 0,
-        'listings': []
+
+});
+
+app.controller('CartController', function($scope, CartFactory) {
+
+    $scope.cart = CartFactory.cart;
+    $scope.set = CartFactory.set;
+    $scope.empty = CartFactory.empty;
+    
+    $scope.category_icons = {
+        'animal': 'pets',
+        'cancer': 'place',
+        'environment': 'local_florist'
     };
 
-    cart.add = function() {
+    // $scope.donation = Math.ceil($scope.cart.total * .2);
+    $scope.donation = CartFactory.cart.total;
+
+});
+
+app.controller('SidenavController', function($scope, $http) {
+        
+
+});
+
+app.factory('CartFactory', function($cookies, $http) {
+
+    var existingCart = $cookies.getObject("cart");
+    var cart = {};
+
+    existingCart ? cart = existingCart : cart = {'quantity': 0, 'total': 0, 'listings': []};
+
+
+    function add() {
+        cart.quantity += 1;
+        cart.total = cart.quantity * 3;
         cart.listings.push(
             {
                 'listing_id': '123',
                 'price': 3,
                 'quantity': 1,
+                'category': 'pets',
                 'selected_variations': {}
             });
-        cart.quantity = cart.quantity + 1;
-        cart.total = cart.quantity * 3;
-        console.log(cart);
-        cart.set();
-    };
+    }
 
-    cart.set = function(){
+    function setCookie(){
         var expireDate = new Date();
         expireDate.setDate(expireDate.getDate() + 7);
 
         $cookies.putObject("cart", cart, {expires: expireDate, path: '/'});
+        console.log("Setting $COOKIE 'cart': ");
         console.log($cookies.getObject("cart"));
-    };
+    }
 
-    cart.empty = function() {
-        cart = {};
+    return {
+        add: add,
+        set: setCookie,
+        cart: cart
     };
-
-    return cart;
 });
