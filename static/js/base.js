@@ -157,7 +157,8 @@ app.controller('HomeController', function($scope, $filter, $mdDialog, $mdSidenav
 });
 
 app.factory('APIFactory', function($http, $cookies) {
-    var base_url = "http://127.0.0.1:5000";
+    var base_url = "http://45.55.81.255:5000";
+    // var base_url = "http://127.0.0.1:5000";
     var APIFactory = {};
 
     APIFactory.getListings = function(){  // add a filter word, 'all','animal','etc'
