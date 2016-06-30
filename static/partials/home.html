@@ -89,10 +89,10 @@
     <div flex="55" flex-offset="10">
         <div class="charity-row">
 
-            <md-button ng-click="showCustom(charity)" class="md-fab md-mini charity-icon">
+            <md-button ng-click="showCustom(charities[0])" class="md-fab md-mini charity-icon">
               <i class="material-icons">pets</i>
             </md-button>
-            <span>{{ charity.name }}</span>
+            <span>{{ charities[0].name }}</span>
 
             <div layout="row" class="listing-row">
                 <div style="display:inherit;">
@@ -116,10 +116,10 @@
         </div>
         <div class="charity-row">
 
-            <md-button ng-click="showCustom(charity)" class="md-fab md-mini charity-icon">
+            <md-button ng-click="showCustom(charities[1])" class="md-fab md-mini charity-icon">
               <i class="material-icons">accessible</i>
             </md-button>
-            <span>{{ charity.name }}</span>
+            <span>{{ charities[1].name }}</span>
 
             <div layout="row" class="listing-row">
                 <div style="display:inherit;">
@@ -143,10 +143,10 @@
         </div>
         <div class="charity-row">
 
-                <md-button ng-click="showCustom(charity)" class="md-fab md-mini charity-icon">
+                <md-button ng-click="showCustom(charities[2])" class="md-fab md-mini charity-icon">
                   <i class="material-icons">local_florist</i>
                 </md-button>
-                <span>{{ charity.name }}</span>
+                <span>{{ charities[2].name }}</span>
 
                 <div layout="row" class="listing-row">
                     <div style="display:inherit;">
@@ -197,6 +197,9 @@
                  We give <span id="cart-total-donation">$ {{ (cart.total * .2) | number: 0}}</span>
              </md-card-footer>
             </md-card>
+            <md-button ng-click="sendCart()">
+                Submit
+            </md-button>
         </div>
 
 

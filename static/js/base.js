@@ -1,6 +1,6 @@
 var app = angular.module("APP", ['ngMaterial', 'ngRoute', 'ngCookies']);
 
-app.config(['$httpProvider', function ($httpProvider) {
+app.config(['$httpProvider', function ($httpProvider, $http) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
@@ -86,6 +86,9 @@ app.controller('HomeController', function($scope, $filter, $mdDialog, $mdSidenav
         }
     ];
     
+    // TODO
+    
+    
     $scope.showCustom = function(charity) {
         console.log(charity.name);
                $mdDialog.show({
@@ -153,7 +156,7 @@ app.controller('HomeController', function($scope, $filter, $mdDialog, $mdSidenav
 
 });
 
-app.factory('APIFactory', function($http) {
+app.factory('APIFactory', function($http, $cookies) {
     var base_url = "http://127.0.0.1:5000";
     var APIFactory = {};
 
@@ -164,12 +167,34 @@ app.factory('APIFactory', function($http) {
         return $http.get(url);
     };
 
+    APIFactory.postCart = function(cart){
+        var url = base_url + '/cart/' + $cookies.get("guest_id");
+        console.log('POSTing cart: ' + url);
+        console.log(cart);
+
+        return $http({
+            method: 'POST',
+            url: url,
+            data: {'total': 3, 'quantity': 4, 'listings': []},
+            headers: {'Content-Type': 'application/json'}
+        })
+
+        $http.post(url, cart)
+            .then(
+                function successCallback(response){
+                    console.log(response);
+                },
+                function errorCallback(response){
+
+                });
+
+    };
 
     return APIFactory;
 
 });
 
-app.controller('CartController', function($scope, $http, $q, $filter, CartFactory, APIFactory) {
+app.controller('CartController', function($scope, $http, $cookies, CartFactory, APIFactory) {
 
     $scope.cart = CartFactory.cart;
     $scope.set = CartFactory.set;
@@ -188,6 +213,16 @@ app.controller('CartController', function($scope, $http, $q, $filter, CartFactor
 
     $scope.donation = CartFactory.cart.total;
 
+    $scope.sendCart = function() {
+        var guest_id = $cookies.get('guest_id');
+
+          $http({
+          url: 'http://127.0.0.1:5000/cart/' + guest_id,
+          headers: {'Content-Type': 'application/json'},
+          method: 'POST',
+          data: CartFactory.cart
+        });
+    }
 });
 
 app.controller('SidenavController', function($scope, $mdSidenav, $http) {
@@ -229,6 +264,7 @@ app.factory('CartFactory', function($cookies) {
 
 
     function add(listing) {
+        listing._id = 'REMOVED';
         cart.quantity += listing.quantity;
         cart.total += (listing.quantity * listing.price);
         console.log(listing);
