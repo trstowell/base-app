@@ -124,7 +124,7 @@ cart-header {
 
 #cart-footer {
     border-top: 5px solid #fafafa;
-    background-color: lightgreen;
+    background-color: rgba(144, 238, 144, .5);
 }
 
 #cart-total-text,
@@ -133,12 +133,12 @@ cart-header {
 }
 
 #cart-total-price {
-    color: green;
     font-weight: bolder;
 }
 
 #cart-total-donation {
-
+    color: green;
+    font-weight: bolder;
 }
     /** CHARITY DIALOG **/
 
@@ -173,4 +173,12 @@ md-dialog p {
 
 .tiffany-font {
     color: #81D8D0;
+}
+
+
+
+/* JUNK */
+
+.md-sidenav-left {
+    width: 300px;
 }

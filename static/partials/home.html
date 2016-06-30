@@ -39,70 +39,141 @@
       </div>
       <div>
           <h3>Step 3</h3>
+          <p>We donate <span style="color: green; font-weight: bolder;">20%</span>!</p>
           <p>Pat yourself on the back!</p>
       </div>
     </div>
-
-     <md-sidenav
+    <div ng-controller="SidenavController" layout="column">
+        <md-sidenav
         class="md-sidenav-left"
         md-component-id="left"
         md-disable-backdrop
-        md-whiteframe="4">
-      <md-toolbar class="md-theme-indigo">
+        md-whiteframe="4"
+        >
+        <md-toolbar class="md-theme-indigo">
         <h1 class="md-toolbar-tools">Add Listing</h1>
-      </md-toolbar>
-      <md-content layout-padding>
-        <md-button ng-click="toggleLeft()">
-          Close
-        </md-button>
-        listing_id, price, quantity
+        </md-toolbar>
+        <md-content layout-padding>
+            <md-input-container>
+                <label>Title</label>
+                <input ng-model="listing.title">
+            </md-input-container>
         <md-input-container>
             <label>Listing ID</label>
             <input ng-model="listing.listing_id">
         </md-input-container>
+
         <md-input-container>
             <label>Price</label>
             <input ng-model="listing.price">
         </md-input-container>
-          <br><md-button ng-click="submit()">Submit</md-button>
+          <md-input-container>
+            <label>Category</label>
+            <md-select ng-model="listing.category">
+              <md-option ng-repeat="(category, value) in categories" value="{{category}}">
+                {{category}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <br>
+        <md-button type="submit" class="md-primary" ng-click="sendForm()">Send</md-button>
 
-      </md-content>
 
-    </md-sidenav>
+        </md-content>
+
+        </md-sidenav>
+    </div>
 
     <div id="home-container" layout="row" layout-align="" flex>
-        <div flex="55" flex-offset="10">
-            <div class="charity-row" ng-repeat="charity in charities">
+
+    <div flex="55" flex-offset="10">
+        <div class="charity-row">
+
+            <md-button ng-click="showCustom(charity)" class="md-fab md-mini charity-icon">
+              <i class="material-icons">pets</i>
+            </md-button>
+            <span>{{ charity.name }}</span>
+
+            <div layout="row" class="listing-row">
+                <div style="display:inherit;">
+                    <md-card ng-repeat="listing in listings | filter:{ category: 'animal' }">
+                    <md-card-title>
+                        <span class="price-card">${{ listing.price }}</span>
+                       <md-card-title-media>
+                        <div class="md-media-lg card-media">
+                            <img src="/static/img/elephant-leggings.jpg">
+                        </div>
+                      </md-card-title-media>
+                    </md-card-title>
+                        <md-card-content><span>{{ listing.title }}</span></md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                     <!-- <md-button class="md-fab md-mini"><i class="material-icons">favorite</i></md-button>-->
+                        <md-button class="buy-button" ng-click="add(listing)">Vote</md-button>
+                    </md-card-actions>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+        <div class="charity-row">
+
+            <md-button ng-click="showCustom(charity)" class="md-fab md-mini charity-icon">
+              <i class="material-icons">accessible</i>
+            </md-button>
+            <span>{{ charity.name }}</span>
+
+            <div layout="row" class="listing-row">
+                <div style="display:inherit;">
+                    <md-card ng-repeat="listing in listings | filter:{ category: 'cancer' }">
+                    <md-card-title>
+                        <span class="price-card">${{ listing.price }}</span>
+                       <md-card-title-media>
+                        <div class="md-media-lg card-media">
+                            <img src="/static/img/elephant-leggings.jpg">
+                        </div>
+                      </md-card-title-media>
+                    </md-card-title>
+                    <md-card-content><span>{{ listing.title }}</span></md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                     <!-- <md-button class="md-fab md-mini"><i class="material-icons">favorite</i></md-button>-->
+                      <md-button class="buy-button" ng-click="add(listing)">Vote</md-button>
+                    </md-card-actions>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+        <div class="charity-row">
+
                 <md-button ng-click="showCustom(charity)" class="md-fab md-mini charity-icon">
-                  <i class="material-icons">{{ charity.icon }}</i>
+                  <i class="material-icons">local_florist</i>
                 </md-button>
                 <span>{{ charity.name }}</span>
 
                 <div layout="row" class="listing-row">
                     <div style="display:inherit;">
-                        <md-card ng-repeat="card in cards">
+                        <md-card ng-repeat="listing in listings | filter:{ category: 'environment' }">
                         <md-card-title>
-                            <span class="price-card">$12</span>
+                            <span class="price-card">${{ listing.price }}</span>
                            <md-card-title-media>
                             <div class="md-media-lg card-media">
                                 <img src="/static/img/elephant-leggings.jpg">
                             </div>
                           </md-card-title-media>
                         </md-card-title>
+                        <md-card-content><span>{{ listing.title }}</span></md-card-content>
                         <md-card-actions layout="row" layout-align="end center">
                          <!-- <md-button class="md-fab md-mini"><i class="material-icons">favorite</i></md-button>-->
-                          <md-button class="buy-button" ng-click="add()">Vote</md-button>
+                          <md-button class="buy-button" ng-click="add(listing)">Vote</md-button>
                         </md-card-actions>
                         </md-card>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div ng-controller="CartController" ng-model="cart" id="cart-container" hide-md hide-sm hide-xs>
         <md-card>
         <md-card-content>
-
             <div id="cart-header" layout="row" layout-align="space-between center">
                 <h2>Votes</h2>
                 <!--<md-button ng-click="empty()">Reset</md-button>-->
@@ -110,8 +181,8 @@
 
             <md-list>
                 <md-list-item  ng-repeat="listing in cart.listings">
-                    <md-button class="md-fab md-mini charity-icon"><i class="material-icons">pets</i></md-button>
-                    <div class="md-list-item-text"><p>{{listing.quantity}}</p></div>
+                    <md-button class="md-fab md-mini charity-icon"><i class="material-icons">{{ category_icons[listing.category] }}</i></md-button>
+                    <div class="md-list-item-text"><p>{{listing.title}}</p></div>
                 </md-list-item>
             <div layout="row" layout-align="space-between center">
                 <div id="cart-total-text">Total:</div>
